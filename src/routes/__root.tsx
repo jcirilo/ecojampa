@@ -79,14 +79,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "EcoJampa — Denúncias de irregularidades em João Pessoa" },
-      { name: "description", content: "Registre, acompanhe e audite irregularidades urbanas em João Pessoa. Mapa colaborativo, conteúdo educativo e gamificação ambiental." },
+      { title: "Protótipo EcoJampa" },
+      { name: "description", content: "[PROJETO UFPB - IHM 2026.1] Registre, acompanhe e audite irregularidades urbanas em João Pessoa. Mapa colaborativo, conteúdo educativo e gamificação ambiental." },
       { name: "author", content: "EcoJampa" },
-      { property: "og:title", content: "EcoJampa — Cidade mais limpa e segura" },
-      { property: "og:description", content: "Denuncie irregularidades urbanas em João Pessoa e acompanhe a resolução em um mapa colaborativo." },
+      { property: "og:title", content: "Protótipo EcoJampa" },
+      { property: "og:description", content: "[PROJETO UFPB - IHM 2026.1] Registre, acompanhe e audite irregularidades urbanas em João Pessoa. Mapa colaborativo, conteúdo educativo e gamificação ambiental." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@EcoJampa" },
+      { name: "twitter:title", content: "Protótipo EcoJampa" },
+      { name: "twitter:description", content: "[PROJETO UFPB - IHM 2026.1] Registre, acompanhe e audite irregularidades urbanas em João Pessoa. Mapa colaborativo, conteúdo educativo e gamificação ambiental." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/21805231-ba8a-4c11-b2c1-81523a223afc/id-preview-e6368426--748de1f3-c985-4a0b-94ae-e3a499ffca55.lovable.app-1781794664166.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/21805231-ba8a-4c11-b2c1-81523a223afc/id-preview-e6368426--748de1f3-c985-4a0b-94ae-e3a499ffca55.lovable.app-1781794664166.png" },
     ],
     links: [
       {

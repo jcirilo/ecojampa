@@ -9,38 +9,247 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TrilhasRouteImport } from './routes/trilhas'
+import { Route as RegistrarRouteImport } from './routes/registrar'
+import { Route as RankingRouteImport } from './routes/ranking'
+import { Route as PerfilRouteImport } from './routes/perfil'
+import { Route as NotificacoesRouteImport } from './routes/notificacoes'
+import { Route as MinhasOcorrenciasRouteImport } from './routes/minhas-ocorrencias'
+import { Route as MapaRouteImport } from './routes/mapa'
+import { Route as ConfiguracoesRouteImport } from './routes/configuracoes'
+import { Route as CadastroRouteImport } from './routes/cadastro'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TrilhasSlugRouteImport } from './routes/trilhas.$slug'
+import { Route as OcorrenciaIdRouteImport } from './routes/ocorrencia.$id'
 
+const TrilhasRoute = TrilhasRouteImport.update({
+  id: '/trilhas',
+  path: '/trilhas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegistrarRoute = RegistrarRouteImport.update({
+  id: '/registrar',
+  path: '/registrar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RankingRoute = RankingRouteImport.update({
+  id: '/ranking',
+  path: '/ranking',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PerfilRoute = PerfilRouteImport.update({
+  id: '/perfil',
+  path: '/perfil',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NotificacoesRoute = NotificacoesRouteImport.update({
+  id: '/notificacoes',
+  path: '/notificacoes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MinhasOcorrenciasRoute = MinhasOcorrenciasRouteImport.update({
+  id: '/minhas-ocorrencias',
+  path: '/minhas-ocorrencias',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MapaRoute = MapaRouteImport.update({
+  id: '/mapa',
+  path: '/mapa',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConfiguracoesRoute = ConfiguracoesRouteImport.update({
+  id: '/configuracoes',
+  path: '/configuracoes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CadastroRoute = CadastroRouteImport.update({
+  id: '/cadastro',
+  path: '/cadastro',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TrilhasSlugRoute = TrilhasSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => TrilhasRoute,
+} as any)
+const OcorrenciaIdRoute = OcorrenciaIdRouteImport.update({
+  id: '/ocorrencia/$id',
+  path: '/ocorrencia/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/cadastro': typeof CadastroRoute
+  '/configuracoes': typeof ConfiguracoesRoute
+  '/mapa': typeof MapaRoute
+  '/minhas-ocorrencias': typeof MinhasOcorrenciasRoute
+  '/notificacoes': typeof NotificacoesRoute
+  '/perfil': typeof PerfilRoute
+  '/ranking': typeof RankingRoute
+  '/registrar': typeof RegistrarRoute
+  '/trilhas': typeof TrilhasRouteWithChildren
+  '/ocorrencia/$id': typeof OcorrenciaIdRoute
+  '/trilhas/$slug': typeof TrilhasSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/cadastro': typeof CadastroRoute
+  '/configuracoes': typeof ConfiguracoesRoute
+  '/mapa': typeof MapaRoute
+  '/minhas-ocorrencias': typeof MinhasOcorrenciasRoute
+  '/notificacoes': typeof NotificacoesRoute
+  '/perfil': typeof PerfilRoute
+  '/ranking': typeof RankingRoute
+  '/registrar': typeof RegistrarRoute
+  '/trilhas': typeof TrilhasRouteWithChildren
+  '/ocorrencia/$id': typeof OcorrenciaIdRoute
+  '/trilhas/$slug': typeof TrilhasSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/cadastro': typeof CadastroRoute
+  '/configuracoes': typeof ConfiguracoesRoute
+  '/mapa': typeof MapaRoute
+  '/minhas-ocorrencias': typeof MinhasOcorrenciasRoute
+  '/notificacoes': typeof NotificacoesRoute
+  '/perfil': typeof PerfilRoute
+  '/ranking': typeof RankingRoute
+  '/registrar': typeof RegistrarRoute
+  '/trilhas': typeof TrilhasRouteWithChildren
+  '/ocorrencia/$id': typeof OcorrenciaIdRoute
+  '/trilhas/$slug': typeof TrilhasSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/cadastro'
+    | '/configuracoes'
+    | '/mapa'
+    | '/minhas-ocorrencias'
+    | '/notificacoes'
+    | '/perfil'
+    | '/ranking'
+    | '/registrar'
+    | '/trilhas'
+    | '/ocorrencia/$id'
+    | '/trilhas/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/cadastro'
+    | '/configuracoes'
+    | '/mapa'
+    | '/minhas-ocorrencias'
+    | '/notificacoes'
+    | '/perfil'
+    | '/ranking'
+    | '/registrar'
+    | '/trilhas'
+    | '/ocorrencia/$id'
+    | '/trilhas/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/cadastro'
+    | '/configuracoes'
+    | '/mapa'
+    | '/minhas-ocorrencias'
+    | '/notificacoes'
+    | '/perfil'
+    | '/ranking'
+    | '/registrar'
+    | '/trilhas'
+    | '/ocorrencia/$id'
+    | '/trilhas/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CadastroRoute: typeof CadastroRoute
+  ConfiguracoesRoute: typeof ConfiguracoesRoute
+  MapaRoute: typeof MapaRoute
+  MinhasOcorrenciasRoute: typeof MinhasOcorrenciasRoute
+  NotificacoesRoute: typeof NotificacoesRoute
+  PerfilRoute: typeof PerfilRoute
+  RankingRoute: typeof RankingRoute
+  RegistrarRoute: typeof RegistrarRoute
+  TrilhasRoute: typeof TrilhasRouteWithChildren
+  OcorrenciaIdRoute: typeof OcorrenciaIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/trilhas': {
+      id: '/trilhas'
+      path: '/trilhas'
+      fullPath: '/trilhas'
+      preLoaderRoute: typeof TrilhasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/registrar': {
+      id: '/registrar'
+      path: '/registrar'
+      fullPath: '/registrar'
+      preLoaderRoute: typeof RegistrarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ranking': {
+      id: '/ranking'
+      path: '/ranking'
+      fullPath: '/ranking'
+      preLoaderRoute: typeof RankingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/perfil': {
+      id: '/perfil'
+      path: '/perfil'
+      fullPath: '/perfil'
+      preLoaderRoute: typeof PerfilRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/notificacoes': {
+      id: '/notificacoes'
+      path: '/notificacoes'
+      fullPath: '/notificacoes'
+      preLoaderRoute: typeof NotificacoesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/minhas-ocorrencias': {
+      id: '/minhas-ocorrencias'
+      path: '/minhas-ocorrencias'
+      fullPath: '/minhas-ocorrencias'
+      preLoaderRoute: typeof MinhasOcorrenciasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mapa': {
+      id: '/mapa'
+      path: '/mapa'
+      fullPath: '/mapa'
+      preLoaderRoute: typeof MapaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/configuracoes': {
+      id: '/configuracoes'
+      path: '/configuracoes'
+      fullPath: '/configuracoes'
+      preLoaderRoute: typeof ConfiguracoesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cadastro': {
+      id: '/cadastro'
+      path: '/cadastro'
+      fullPath: '/cadastro'
+      preLoaderRoute: typeof CadastroRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +257,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/trilhas/$slug': {
+      id: '/trilhas/$slug'
+      path: '/$slug'
+      fullPath: '/trilhas/$slug'
+      preLoaderRoute: typeof TrilhasSlugRouteImport
+      parentRoute: typeof TrilhasRoute
+    }
+    '/ocorrencia/$id': {
+      id: '/ocorrencia/$id'
+      path: '/ocorrencia/$id'
+      fullPath: '/ocorrencia/$id'
+      preLoaderRoute: typeof OcorrenciaIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
+interface TrilhasRouteChildren {
+  TrilhasSlugRoute: typeof TrilhasSlugRoute
+}
+
+const TrilhasRouteChildren: TrilhasRouteChildren = {
+  TrilhasSlugRoute: TrilhasSlugRoute,
+}
+
+const TrilhasRouteWithChildren =
+  TrilhasRoute._addFileChildren(TrilhasRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CadastroRoute: CadastroRoute,
+  ConfiguracoesRoute: ConfiguracoesRoute,
+  MapaRoute: MapaRoute,
+  MinhasOcorrenciasRoute: MinhasOcorrenciasRoute,
+  NotificacoesRoute: NotificacoesRoute,
+  PerfilRoute: PerfilRoute,
+  RankingRoute: RankingRoute,
+  RegistrarRoute: RegistrarRoute,
+  TrilhasRoute: TrilhasRouteWithChildren,
+  OcorrenciaIdRoute: OcorrenciaIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

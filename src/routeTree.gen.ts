@@ -19,6 +19,7 @@ import { Route as MapaRouteImport } from './routes/mapa'
 import { Route as ConfiguracoesRouteImport } from './routes/configuracoes'
 import { Route as CadastroRouteImport } from './routes/cadastro'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as UsuarioIdRouteImport } from './routes/usuario.$id'
 import { Route as TrilhasSlugRouteImport } from './routes/trilhas.$slug'
 import { Route as OcorrenciaIdRouteImport } from './routes/ocorrencia.$id'
 
@@ -72,6 +73,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const UsuarioIdRoute = UsuarioIdRouteImport.update({
+  id: '/usuario/$id',
+  path: '/usuario/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TrilhasSlugRoute = TrilhasSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -96,6 +102,7 @@ export interface FileRoutesByFullPath {
   '/trilhas': typeof TrilhasRouteWithChildren
   '/ocorrencia/$id': typeof OcorrenciaIdRoute
   '/trilhas/$slug': typeof TrilhasSlugRoute
+  '/usuario/$id': typeof UsuarioIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -110,6 +117,7 @@ export interface FileRoutesByTo {
   '/trilhas': typeof TrilhasRouteWithChildren
   '/ocorrencia/$id': typeof OcorrenciaIdRoute
   '/trilhas/$slug': typeof TrilhasSlugRoute
+  '/usuario/$id': typeof UsuarioIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -125,6 +133,7 @@ export interface FileRoutesById {
   '/trilhas': typeof TrilhasRouteWithChildren
   '/ocorrencia/$id': typeof OcorrenciaIdRoute
   '/trilhas/$slug': typeof TrilhasSlugRoute
+  '/usuario/$id': typeof UsuarioIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -141,6 +150,7 @@ export interface FileRouteTypes {
     | '/trilhas'
     | '/ocorrencia/$id'
     | '/trilhas/$slug'
+    | '/usuario/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -155,6 +165,7 @@ export interface FileRouteTypes {
     | '/trilhas'
     | '/ocorrencia/$id'
     | '/trilhas/$slug'
+    | '/usuario/$id'
   id:
     | '__root__'
     | '/'
@@ -169,6 +180,7 @@ export interface FileRouteTypes {
     | '/trilhas'
     | '/ocorrencia/$id'
     | '/trilhas/$slug'
+    | '/usuario/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -183,6 +195,7 @@ export interface RootRouteChildren {
   RegistrarRoute: typeof RegistrarRoute
   TrilhasRoute: typeof TrilhasRouteWithChildren
   OcorrenciaIdRoute: typeof OcorrenciaIdRoute
+  UsuarioIdRoute: typeof UsuarioIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -257,6 +270,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/usuario/$id': {
+      id: '/usuario/$id'
+      path: '/usuario/$id'
+      fullPath: '/usuario/$id'
+      preLoaderRoute: typeof UsuarioIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/trilhas/$slug': {
       id: '/trilhas/$slug'
       path: '/$slug'
@@ -297,6 +317,7 @@ const rootRouteChildren: RootRouteChildren = {
   RegistrarRoute: RegistrarRoute,
   TrilhasRoute: TrilhasRouteWithChildren,
   OcorrenciaIdRoute: OcorrenciaIdRoute,
+  UsuarioIdRoute: UsuarioIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

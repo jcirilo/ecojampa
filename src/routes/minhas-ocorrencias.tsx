@@ -28,9 +28,14 @@ function MyOccurrencesPage() {
             params={{ id: o.id }}
             className="block overflow-hidden rounded-2xl border bg-card shadow-sm transition-colors hover:bg-muted/40"
           >
-            <div className="grid h-32 w-full place-items-center bg-muted text-muted-foreground">
-              <ImageIcon className="h-8 w-8" />
+            <div className="grid h-32 w-full place-items-center overflow-hidden bg-muted text-muted-foreground">
+              {o.image ? (
+                <img src={o.image} alt={o.title} loading="lazy" width={1024} height={1024} className="h-full w-full object-cover" />
+              ) : (
+                <ImageIcon className="h-8 w-8" />
+              )}
             </div>
+
             <div className="space-y-2 p-3">
               <div className="flex items-start justify-between gap-2">
                 <p className="min-w-0 flex-1 truncate font-semibold">{o.title}</p>

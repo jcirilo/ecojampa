@@ -26,7 +26,7 @@ function TracksPage() {
       <p className="mb-4 text-sm text-muted-foreground">
         Aprenda a lidar com problemas urbanos e ambientais da sua cidade.
       </p>
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-2 gap-3">
         {studyTracks.map((t) => {
           const Icon = t.icon;
           return (

@@ -89,8 +89,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:site", content: "@EcoJampa" },
       { name: "twitter:title", content: "Protótipo EcoJampa" },
       { name: "twitter:description", content: "[PROJETO UFPB - IHM 2026.1] Registre, acompanhe e audite irregularidades urbanas em João Pessoa. Mapa colaborativo, conteúdo educativo e gamificação ambiental." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/21805231-ba8a-4c11-b2c1-81523a223afc/id-preview-e6368426--748de1f3-c985-4a0b-94ae-e3a499ffca55.lovable.app-1781794664166.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/21805231-ba8a-4c11-b2c1-81523a223afc/id-preview-e6368426--748de1f3-c985-4a0b-94ae-e3a499ffca55.lovable.app-1781794664166.png" },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/f84eb72c-a7d3-4804-a9f0-e256e7f5526e/id-preview-15827960--748de1f3-c985-4a0b-94ae-e3a499ffca55.lovable.app-1782360455677.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/f84eb72c-a7d3-4804-a9f0-e256e7f5526e/id-preview-15827960--748de1f3-c985-4a0b-94ae-e3a499ffca55.lovable.app-1782360455677.png" },
     ],
     links: [
       {

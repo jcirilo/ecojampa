@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Trophy, LogOut, ImageIcon } from "lucide-react";
+import { useRef, useState } from "react";
+import { Trophy, LogOut, Camera } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 import { AuthGate } from "@/components/AuthGate";
 import { Button } from "@/components/ui/button";
@@ -20,17 +21,47 @@ export const Route = createFileRoute("/perfil")({
 
 function ProfilePage() {
   const { name, logout } = useAuth();
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [photo, setPhoto] = useState<string>(currentUser.avatar);
+
+  const handlePhoto = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) setPhoto(URL.createObjectURL(file));
+  };
 
   return (
     <AppShell title="Meu perfil" showBell>
       <div className="space-y-6">
         <div className="flex flex-col items-center text-center">
-          <span className="grid h-24 w-24 place-items-center rounded-full bg-muted text-muted-foreground ring-4 ring-primary/20">
-            <ImageIcon className="h-8 w-8" />
-          </span>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            className="hidden"
+            onChange={handlePhoto}
+          />
+          <button
+            type="button"
+            onClick={() => fileInputRef.current?.click()}
+            aria-label="Alterar foto de perfil"
+            className="group relative h-24 w-24 overflow-hidden rounded-full bg-muted ring-4 ring-primary/20"
+          >
+            <img src={photo} alt={name} className="h-full w-full object-cover" />
+            <span className="absolute inset-x-0 bottom-0 grid place-items-center bg-foreground/55 py-1.5 text-background">
+              <Camera className="h-4 w-4" />
+            </span>
+          </button>
+          <button
+            type="button"
+            onClick={() => fileInputRef.current?.click()}
+            className="mt-2 text-xs font-medium text-primary hover:underline"
+          >
+            Alterar foto de perfil
+          </button>
           <h2 className="mt-3 font-display text-xl font-bold">{name}</h2>
           <p className="text-sm text-muted-foreground">{currentUser.neighborhood} · João Pessoa</p>
         </div>
+
 
         <div className="grid grid-cols-3 overflow-hidden rounded-2xl bg-primary text-primary-foreground">
           <Stat value={currentUser.occurrencesCount} label="Ocorrências" />

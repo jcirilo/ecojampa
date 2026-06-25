@@ -26,9 +26,10 @@ function MapPage() {
   return (
     <AppShell title="Mapa" showBell showBrand>
       <div className="space-y-4">
-        <div className="relative h-64 overflow-hidden rounded-2xl border shadow-sm">
+        <div className="relative -mx-4 -mt-4 h-72 overflow-hidden border-b">
           <MapView items={filtered} />
         </div>
+
 
         <div className="flex gap-2 overflow-x-auto pb-1">
           <FilterPill label="Todas" active={active === "todas"} onClick={() => setActive("todas")} />
@@ -61,20 +62,33 @@ function MapPage() {
                 key={o.id}
                 to="/ocorrencia/$id"
                 params={{ id: o.id }}
-                className="block rounded-xl border bg-card p-3 shadow-sm transition-colors hover:bg-muted/50"
+                className="flex gap-3 rounded-xl border bg-card p-3 shadow-sm transition-colors hover:bg-muted/50"
               >
-                <div className="flex items-start justify-between gap-2">
-                  <p className="min-w-0 flex-1 truncate font-semibold">{o.title}</p>
-                  <StatusBadge status={o.status} />
-                </div>
-                <div className="mt-2 flex items-center justify-between gap-2">
-                  <CategoryChip category={o.category} />
-                  <span className="shrink-0 text-xs text-muted-foreground">
-                    {o.neighborhood} · {o.distanceKm} km
-                  </span>
+                {o.image && (
+                  <img
+                    src={o.image}
+                    alt={o.title}
+                    loading="lazy"
+                    width={1024}
+                    height={1024}
+                    className="h-16 w-16 shrink-0 rounded-lg object-cover"
+                  />
+                )}
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-start justify-between gap-2">
+                    <p className="min-w-0 flex-1 truncate font-semibold">{o.title}</p>
+                    <StatusBadge status={o.status} />
+                  </div>
+                  <div className="mt-2 flex items-center justify-between gap-2">
+                    <CategoryChip category={o.category} />
+                    <span className="shrink-0 text-xs text-muted-foreground">
+                      {o.neighborhood} · {o.distanceKm} km
+                    </span>
+                  </div>
                 </div>
               </Link>
             ))}
+
           </div>
         </div>
       </div>

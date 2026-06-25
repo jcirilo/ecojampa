@@ -11,6 +11,18 @@ import {
   Leaf,
   type LucideIcon,
 } from "lucide-react";
+import occ1 from "@/assets/occ-1.jpg";
+import occ2 from "@/assets/occ-2.jpg";
+import occ3 from "@/assets/occ-3.jpg";
+import occ4 from "@/assets/occ-4.jpg";
+import occ5 from "@/assets/occ-5.jpg";
+import avatar1 from "@/assets/avatar-1.jpg";
+import avatar2 from "@/assets/avatar-2.jpg";
+import avatar3 from "@/assets/avatar-3.jpg";
+import avatar4 from "@/assets/avatar-4.jpg";
+import avatar5 from "@/assets/avatar-5.jpg";
+import avatar6 from "@/assets/avatar-6.jpg";
+import avatar7 from "@/assets/avatar-7.jpg";
 
 export type CategoryId = "iluminacao" | "descarte" | "vandalismo";
 
@@ -63,6 +75,7 @@ export const JP_CENTER: [number, number] = [-7.1195, -34.845];
 export const occurrences: Occurrence[] = [
   {
     id: "1",
+    image: occ1,
     title: "Poste apagado na esquina",
     category: "iluminacao",
     status: "em_analise",
@@ -78,6 +91,7 @@ export const occurrences: Occurrence[] = [
   },
   {
     id: "2",
+    image: occ2,
     title: "Descarte irregular de entulho",
     category: "descarte",
     status: "aberta",
@@ -93,6 +107,7 @@ export const occurrences: Occurrence[] = [
   },
   {
     id: "3",
+    image: occ3,
     title: "Pichação em ponto de ônibus",
     category: "vandalismo",
     status: "aberta",
@@ -107,6 +122,7 @@ export const occurrences: Occurrence[] = [
   },
   {
     id: "4",
+    image: occ4,
     title: "Lâmpada queimada na praça",
     category: "iluminacao",
     status: "resolvida",
@@ -122,6 +138,7 @@ export const occurrences: Occurrence[] = [
   },
   {
     id: "5",
+    image: occ5,
     title: "Lixo acumulado na orla",
     category: "descarte",
     status: "em_analise",
@@ -145,20 +162,31 @@ export const myOccurrences = occurrences.filter((o) => o.mine);
 
 export interface RankingEntry {
   position: number;
+  id: string;
   name: string;
   xp: number;
+  avatar: string;
+  neighborhood: string;
+  occurrencesCount: number;
+  auditedCount: number;
+  /** ids of earned badges */
+  earnedBadges: string[];
   isCurrentUser?: boolean;
 }
 
 export const ranking: RankingEntry[] = [
-  { position: 1, name: "Marina Souza", xp: 1000 },
-  { position: 2, name: "Carlos Eduardo", xp: 900 },
-  { position: 3, name: "Você", xp: 800, isCurrentUser: true },
-  { position: 4, name: "Bárbara Alves", xp: 700 },
-  { position: 5, name: "Igor Wanderley", xp: 600 },
-  { position: 6, name: "Gisele Menezes", xp: 540 },
-  { position: 7, name: "João Victor", xp: 480 },
+  { position: 1, id: "marina", name: "Marina Souza", xp: 1000, avatar: avatar1, neighborhood: "Tambaú", occurrencesCount: 14, auditedCount: 32, earnedBadges: ["first", "guardian", "recycler", "eco", "auditor"] },
+  { position: 2, id: "carlos", name: "Carlos Eduardo", xp: 900, avatar: avatar2, neighborhood: "Tambaú", occurrencesCount: 11, auditedCount: 25, earnedBadges: ["first", "guardian", "recycler", "auditor"] },
+  { position: 3, id: "voce", name: "Você", xp: 800, avatar: avatar3, neighborhood: "Tambaú", occurrencesCount: 2, auditedCount: 8, earnedBadges: ["first", "guardian", "recycler"], isCurrentUser: true },
+  { position: 4, id: "barbara", name: "Bárbara Alves", xp: 700, avatar: avatar4, neighborhood: "Tambaú", occurrencesCount: 7, auditedCount: 19, earnedBadges: ["first", "guardian", "recycler"] },
+  { position: 5, id: "igor", name: "Igor Wanderley", xp: 600, avatar: avatar5, neighborhood: "Tambaú", occurrencesCount: 6, auditedCount: 14, earnedBadges: ["first", "guardian"] },
+  { position: 6, id: "gisele", name: "Gisele Menezes", xp: 540, avatar: avatar6, neighborhood: "Tambaú", occurrencesCount: 4, auditedCount: 10, earnedBadges: ["first", "recycler"] },
+  { position: 7, id: "joao", name: "João Victor", xp: 480, avatar: avatar7, neighborhood: "Tambaú", occurrencesCount: 3, auditedCount: 7, earnedBadges: ["first"] },
 ];
+
+export function getRankingEntry(id: string): RankingEntry | undefined {
+  return ranking.find((r) => r.id === id);
+}
 
 export interface Badge {
   id: string;
@@ -175,6 +203,10 @@ export const badges: Badge[] = [
   { id: "eco", label: "Eco Herói", description: "Alcançou 1000 XP", icon: Leaf, earned: false },
   { id: "auditor", label: "Auditor", description: "Auditou 20 ocorrências", icon: Award, earned: false },
 ];
+
+export function getBadge(id: string): Badge | undefined {
+  return badges.find((b) => b.id === id);
+}
 
 export interface NotificationItem {
   id: string;
@@ -279,4 +311,5 @@ export const currentUser = {
   neighborhoodRank: 3,
   auditedCount: 8,
   xp: 800,
+  avatar: avatar3,
 };

@@ -1,5 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { Trophy, User } from "lucide-react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { Trophy } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 import { ranking } from "@/lib/mock-data";
 import { cn } from "@/lib/utils";
@@ -23,28 +23,34 @@ function RankingPage() {
 
       <ul className="space-y-2">
         {ranking.map((r) => (
-          <li
-            key={r.position}
-            className={cn(
-              "flex items-center gap-3 rounded-xl border bg-card p-3",
-              r.isCurrentUser && "border-primary bg-primary/5",
-            )}
-          >
-            <span
+          <li key={r.position}>
+            <Link
+              to="/usuario/$id"
+              params={{ id: r.id }}
               className={cn(
-                "w-6 text-center font-display text-lg font-extrabold",
-                r.position <= 3 ? medal[r.position - 1] : "text-muted-foreground",
+                "flex items-center gap-3 rounded-xl border bg-card p-3 transition-colors hover:bg-muted/50",
+                r.isCurrentUser && "border-primary bg-primary/5",
               )}
             >
-              {r.position}
-            </span>
-            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-muted text-muted-foreground">
-              <User className="h-4 w-4" />
-            </span>
-            <span className={cn("min-w-0 flex-1 truncate font-medium", r.isCurrentUser && "text-primary")}>
-              {r.name}
-            </span>
-            <span className="shrink-0 font-semibold text-muted-foreground">{r.xp} XP</span>
+              <span
+                className={cn(
+                  "w-6 text-center font-display text-lg font-extrabold",
+                  r.position <= 3 ? medal[r.position - 1] : "text-muted-foreground",
+                )}
+              >
+                {r.position}
+              </span>
+              <img
+                src={r.avatar}
+                alt={r.name}
+                loading="lazy"
+                className="h-9 w-9 shrink-0 rounded-full object-cover"
+              />
+              <span className={cn("min-w-0 flex-1 truncate font-medium", r.isCurrentUser && "text-primary")}>
+                {r.name}
+              </span>
+              <span className="shrink-0 font-semibold text-muted-foreground">{r.xp} XP</span>
+            </Link>
           </li>
         ))}
       </ul>

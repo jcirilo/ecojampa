@@ -34,8 +34,13 @@ function OccurrencePage() {
     <AppShell title="Ocorrência" showBack showNav={false}>
       <div className="space-y-4">
         <div className="grid aspect-video w-full place-items-center overflow-hidden rounded-2xl bg-muted text-muted-foreground">
-          <ImageIcon className="h-10 w-10" />
+          {occ.image ? (
+            <img src={occ.image} alt={occ.title} width={1024} height={1024} className="h-full w-full object-cover" />
+          ) : (
+            <ImageIcon className="h-10 w-10" />
+          )}
         </div>
+
 
         <div className="flex items-start justify-between gap-2">
           <h2 className="font-display text-xl font-bold">{occ.title}</h2>

@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TrilhasRouteImport } from './routes/trilhas'
 import { Route as RegistrarRouteImport } from './routes/registrar'
+import { Route as RecuperarSenhaRouteImport } from './routes/recuperar-senha'
 import { Route as RankingRouteImport } from './routes/ranking'
 import { Route as PerfilRouteImport } from './routes/perfil'
 import { Route as NotificacoesRouteImport } from './routes/notificacoes'
@@ -18,6 +19,7 @@ import { Route as MinhasOcorrenciasRouteImport } from './routes/minhas-ocorrenci
 import { Route as MapaRouteImport } from './routes/mapa'
 import { Route as ConfiguracoesRouteImport } from './routes/configuracoes'
 import { Route as CadastroRouteImport } from './routes/cadastro'
+import { Route as AjudaRouteImport } from './routes/ajuda'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as UsuarioIdRouteImport } from './routes/usuario.$id'
 import { Route as TrilhasSlugRouteImport } from './routes/trilhas.$slug'
@@ -31,6 +33,11 @@ const TrilhasRoute = TrilhasRouteImport.update({
 const RegistrarRoute = RegistrarRouteImport.update({
   id: '/registrar',
   path: '/registrar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RecuperarSenhaRoute = RecuperarSenhaRouteImport.update({
+  id: '/recuperar-senha',
+  path: '/recuperar-senha',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RankingRoute = RankingRouteImport.update({
@@ -68,6 +75,11 @@ const CadastroRoute = CadastroRouteImport.update({
   path: '/cadastro',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AjudaRoute = AjudaRouteImport.update({
+  id: '/ajuda',
+  path: '/ajuda',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -91,6 +103,7 @@ const OcorrenciaIdRoute = OcorrenciaIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/ajuda': typeof AjudaRoute
   '/cadastro': typeof CadastroRoute
   '/configuracoes': typeof ConfiguracoesRoute
   '/mapa': typeof MapaRoute
@@ -98,6 +111,7 @@ export interface FileRoutesByFullPath {
   '/notificacoes': typeof NotificacoesRoute
   '/perfil': typeof PerfilRoute
   '/ranking': typeof RankingRoute
+  '/recuperar-senha': typeof RecuperarSenhaRoute
   '/registrar': typeof RegistrarRoute
   '/trilhas': typeof TrilhasRouteWithChildren
   '/ocorrencia/$id': typeof OcorrenciaIdRoute
@@ -106,6 +120,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/ajuda': typeof AjudaRoute
   '/cadastro': typeof CadastroRoute
   '/configuracoes': typeof ConfiguracoesRoute
   '/mapa': typeof MapaRoute
@@ -113,6 +128,7 @@ export interface FileRoutesByTo {
   '/notificacoes': typeof NotificacoesRoute
   '/perfil': typeof PerfilRoute
   '/ranking': typeof RankingRoute
+  '/recuperar-senha': typeof RecuperarSenhaRoute
   '/registrar': typeof RegistrarRoute
   '/trilhas': typeof TrilhasRouteWithChildren
   '/ocorrencia/$id': typeof OcorrenciaIdRoute
@@ -122,6 +138,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/ajuda': typeof AjudaRoute
   '/cadastro': typeof CadastroRoute
   '/configuracoes': typeof ConfiguracoesRoute
   '/mapa': typeof MapaRoute
@@ -129,6 +146,7 @@ export interface FileRoutesById {
   '/notificacoes': typeof NotificacoesRoute
   '/perfil': typeof PerfilRoute
   '/ranking': typeof RankingRoute
+  '/recuperar-senha': typeof RecuperarSenhaRoute
   '/registrar': typeof RegistrarRoute
   '/trilhas': typeof TrilhasRouteWithChildren
   '/ocorrencia/$id': typeof OcorrenciaIdRoute
@@ -139,6 +157,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/ajuda'
     | '/cadastro'
     | '/configuracoes'
     | '/mapa'
@@ -146,6 +165,7 @@ export interface FileRouteTypes {
     | '/notificacoes'
     | '/perfil'
     | '/ranking'
+    | '/recuperar-senha'
     | '/registrar'
     | '/trilhas'
     | '/ocorrencia/$id'
@@ -154,6 +174,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/ajuda'
     | '/cadastro'
     | '/configuracoes'
     | '/mapa'
@@ -161,6 +182,7 @@ export interface FileRouteTypes {
     | '/notificacoes'
     | '/perfil'
     | '/ranking'
+    | '/recuperar-senha'
     | '/registrar'
     | '/trilhas'
     | '/ocorrencia/$id'
@@ -169,6 +191,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/ajuda'
     | '/cadastro'
     | '/configuracoes'
     | '/mapa'
@@ -176,6 +199,7 @@ export interface FileRouteTypes {
     | '/notificacoes'
     | '/perfil'
     | '/ranking'
+    | '/recuperar-senha'
     | '/registrar'
     | '/trilhas'
     | '/ocorrencia/$id'
@@ -185,6 +209,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AjudaRoute: typeof AjudaRoute
   CadastroRoute: typeof CadastroRoute
   ConfiguracoesRoute: typeof ConfiguracoesRoute
   MapaRoute: typeof MapaRoute
@@ -192,6 +217,7 @@ export interface RootRouteChildren {
   NotificacoesRoute: typeof NotificacoesRoute
   PerfilRoute: typeof PerfilRoute
   RankingRoute: typeof RankingRoute
+  RecuperarSenhaRoute: typeof RecuperarSenhaRoute
   RegistrarRoute: typeof RegistrarRoute
   TrilhasRoute: typeof TrilhasRouteWithChildren
   OcorrenciaIdRoute: typeof OcorrenciaIdRoute
@@ -212,6 +238,13 @@ declare module '@tanstack/react-router' {
       path: '/registrar'
       fullPath: '/registrar'
       preLoaderRoute: typeof RegistrarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/recuperar-senha': {
+      id: '/recuperar-senha'
+      path: '/recuperar-senha'
+      fullPath: '/recuperar-senha'
+      preLoaderRoute: typeof RecuperarSenhaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/ranking': {
@@ -263,6 +296,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CadastroRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ajuda': {
+      id: '/ajuda'
+      path: '/ajuda'
+      fullPath: '/ajuda'
+      preLoaderRoute: typeof AjudaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -307,6 +347,7 @@ const TrilhasRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AjudaRoute: AjudaRoute,
   CadastroRoute: CadastroRoute,
   ConfiguracoesRoute: ConfiguracoesRoute,
   MapaRoute: MapaRoute,
@@ -314,6 +355,7 @@ const rootRouteChildren: RootRouteChildren = {
   NotificacoesRoute: NotificacoesRoute,
   PerfilRoute: PerfilRoute,
   RankingRoute: RankingRoute,
+  RecuperarSenhaRoute: RecuperarSenhaRoute,
   RegistrarRoute: RegistrarRoute,
   TrilhasRoute: TrilhasRouteWithChildren,
   OcorrenciaIdRoute: OcorrenciaIdRoute,

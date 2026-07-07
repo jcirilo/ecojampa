@@ -1,10 +1,12 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { ImageIcon, ThumbsUp, CheckCircle2, MapPin, CalendarDays } from "lucide-react";
+import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
+import { ImageIcon, ThumbsUp, BadgeCheck, MapPin, CalendarDays } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 import { CategoryChip, StatusBadge } from "@/components/badges";
 import { Button } from "@/components/ui/button";
 import { getOccurrence } from "@/lib/mock-data";
 import { toast } from "sonner";
+
 
 export const Route = createFileRoute("/ocorrencia/$id")({
   head: () => ({
@@ -21,6 +23,8 @@ export const Route = createFileRoute("/ocorrencia/$id")({
 function OccurrencePage() {
   const { id } = Route.useParams();
   const occ = getOccurrence(id);
+  const [confirmed, setConfirmed] = useState(false);
+  const [resolved, setResolved] = useState(false);
 
   if (!occ) {
     return (
@@ -33,7 +37,7 @@ function OccurrencePage() {
   return (
     <AppShell title="Ocorrência" showBack showNav={false}>
       <div className="space-y-4">
-        <div className="grid aspect-video w-full place-items-center overflow-hidden rounded-2xl bg-muted text-muted-foreground">
+        <div className="grid aspect-[16/7] w-full place-items-center overflow-hidden rounded-2xl bg-muted text-muted-foreground">
           {occ.image ? (
             <img src={occ.image} alt={occ.title} width={1024} height={1024} className="h-full w-full object-cover" />
           ) : (
@@ -63,26 +67,33 @@ function OccurrencePage() {
         </div>
 
         <div className="rounded-xl border bg-card p-3 text-sm">
-          <span className="font-semibold text-primary">{occ.confirmations}</span>{" "}
+          <span className="font-semibold text-primary">{occ.confirmations + (confirmed ? 1 : 0)}</span>{" "}
           <span className="text-muted-foreground">moradores confirmaram esta ocorrência</span>
         </div>
 
-        <div className="space-y-2 pt-2">
+        <div className="grid grid-cols-2 gap-2 pt-2">
           <Button
-            className="w-full gap-2"
-            onClick={() => toast.success("Ocorrência confirmada!", { description: "Obrigado por auditar." })}
+            className="gap-2"
+            disabled={confirmed}
+            onClick={() => {
+              setConfirmed(true);
+              toast.success("Presença confirmada!", { description: "Obrigado por validar esta ocorrência." });
+            }}
           >
-            <ThumbsUp className="h-5 w-5" /> Confirmar ocorrência
+            <ThumbsUp className="h-5 w-5" />
+            {confirmed ? "Confirmada" : "Confirmar que existe"}
           </Button>
           <Button
             variant="outline"
-            className="w-full gap-2"
-            onClick={() => toast.success("Resolução sinalizada!", { description: "Os órgãos serão notificados." })}
+            className="gap-2"
+            disabled={resolved}
+            onClick={() => {
+              setResolved(true);
+              toast.success("Marcada como resolvida!", { description: "Os órgãos responsáveis serão notificados." });
+            }}
           >
-            <CheckCircle2 className="h-5 w-5" /> Sinalizar resolução
-          </Button>
-          <Button asChild variant="ghost" className="w-full">
-            <Link to="/mapa">Voltar ao mapa</Link>
+            <BadgeCheck className="h-5 w-5" />
+            {resolved ? "Sinalizada" : "Marcar resolvida"}
           </Button>
         </div>
       </div>

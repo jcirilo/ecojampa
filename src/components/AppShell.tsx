@@ -1,6 +1,6 @@
 import { type ReactNode } from "react";
 import { Link, useRouter } from "@tanstack/react-router";
-import { ArrowLeft, Bell, Leaf } from "lucide-react";
+import { ArrowLeft, Bell, HelpCircle, Leaf } from "lucide-react";
 import { BottomNav } from "./BottomNav";
 import { notifications } from "@/lib/mock-data";
 import { cn } from "@/lib/utils";
@@ -11,7 +11,7 @@ interface AppShellProps {
   showBack?: boolean;
   showBell?: boolean;
   showNav?: boolean;
-  showBrand?: boolean;
+  showHelp?: boolean;
   /** remove default content padding (e.g. for full-bleed map) */
   flush?: boolean;
 }
@@ -22,7 +22,7 @@ export function AppShell({
   showBack = false,
   showBell = false,
   showNav = true,
-  showBrand = false,
+  showHelp = false,
   flush = false,
 }: AppShellProps) {
   const router = useRouter();
@@ -31,7 +31,7 @@ export function AppShell({
   return (
     <div className="mx-auto flex min-h-screen w-full max-w-md flex-col bg-background shadow-xl sm:my-0">
       <header className="sticky top-0 z-30 flex items-center gap-3 border-b bg-card/95 px-4 py-3 backdrop-blur">
-        {showBack && (
+        {showBack ? (
           <button
             onClick={() => router.history.back()}
             aria-label="Voltar"
@@ -39,15 +39,27 @@ export function AppShell({
           >
             <ArrowLeft className="h-5 w-5" />
           </button>
-        )}
-        {showBrand && (
-          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-primary text-primary-foreground">
+        ) : (
+          <Link
+            to="/mapa"
+            aria-label="EcoJampa"
+            className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-primary text-primary-foreground"
+          >
             <Leaf className="h-5 w-5" />
-          </span>
+          </Link>
         )}
         <h1 className="min-w-0 flex-1 truncate font-display text-lg font-bold text-foreground">
           {title}
         </h1>
+        {showHelp && (
+          <Link
+            to="/ajuda"
+            aria-label="Ajuda"
+            className="grid h-9 w-9 shrink-0 place-items-center rounded-full text-foreground transition-colors hover:bg-muted"
+          >
+            <HelpCircle className="h-5 w-5" />
+          </Link>
+        )}
         {showBell && (
           <Link
             to="/notificacoes"

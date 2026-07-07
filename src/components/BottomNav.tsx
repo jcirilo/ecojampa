@@ -1,10 +1,10 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { MapPin, Clock, BookOpen, User, Settings } from "lucide-react";
+import { MapPin, ClipboardList, BookOpen, User, Settings } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const items = [
   { to: "/mapa", label: "Mapa", icon: MapPin },
-  { to: "/minhas-ocorrencias", label: "Histórico", icon: Clock },
+  { to: "/minhas-ocorrencias", label: "Ocorrências", icon: ClipboardList },
   { to: "/trilhas", label: "Trilhas", icon: BookOpen },
   { to: "/perfil", label: "Perfil", icon: User },
   { to: "/configuracoes", label: "Ajustes", icon: Settings },

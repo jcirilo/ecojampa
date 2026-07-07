@@ -1,11 +1,11 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { Plus, SlidersHorizontal, MapPin } from "lucide-react";
+import { SlidersHorizontal, MapPin } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 import { MapView } from "@/components/MapView";
-import { CategoryChip, StatusBadge } from "@/components/badges";
-import { Button } from "@/components/ui/button";
-import { categories, occurrences, type CategoryId } from "@/lib/mock-data";
+import { OccurrenceCard } from "@/components/OccurrenceCard";
+import { RegisterFab } from "@/components/RegisterFab";
+import { occurrences, categories, type CategoryId } from "@/lib/mock-data";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/mapa")({
@@ -24,73 +24,42 @@ function MapPage() {
   const nearby = [...filtered].sort((a, b) => a.distanceKm - b.distanceKm);
 
   return (
-    <AppShell title="Mapa" showBell showBrand>
-      <div className="space-y-4">
-        <div className="relative -mx-4 -mt-4 h-72 overflow-hidden border-b">
+    <AppShell title="Mapa" showBell showHelp flush>
+      <div className="relative">
+        <div className="h-64 overflow-hidden border-b sm:h-72">
           <MapView items={filtered} />
         </div>
 
-
-        <div className="flex gap-2 overflow-x-auto pb-1">
-          <FilterPill label="Todas" active={active === "todas"} onClick={() => setActive("todas")} />
-          {categories.map((c) => (
-            <FilterPill
-              key={c.id}
-              label={c.label}
-              active={active === c.id}
-              onClick={() => setActive(c.id)}
-            />
-          ))}
-          <span className="ml-auto flex shrink-0 items-center gap-1.5 self-center text-xs text-muted-foreground">
-            <SlidersHorizontal className="h-3.5 w-3.5" /> Filtrar
-          </span>
-        </div>
-
-        <Button asChild size="lg" className="w-full gap-2">
-          <Link to="/registrar">
-            <Plus className="h-5 w-5" /> Registrar ocorrência
-          </Link>
-        </Button>
-
-        <div>
-          <h2 className="mb-2 flex items-center gap-1.5 font-display text-base font-bold">
-            <MapPin className="h-4 w-4 text-primary" /> Ocorrências próximas
-          </h2>
-          <div className="space-y-2.5">
-            {nearby.map((o) => (
-              <Link
-                key={o.id}
-                to="/ocorrencia/$id"
-                params={{ id: o.id }}
-                className="flex gap-3 rounded-xl border bg-card p-3 shadow-sm transition-colors hover:bg-muted/50"
-              >
-                {o.image && (
-                  <img
-                    src={o.image}
-                    alt={o.title}
-                    loading="lazy"
-                    width={1024}
-                    height={1024}
-                    className="h-16 w-16 shrink-0 rounded-lg object-cover"
-                  />
-                )}
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-start justify-between gap-2">
-                    <p className="min-w-0 flex-1 truncate font-semibold">{o.title}</p>
-                    <StatusBadge status={o.status} />
-                  </div>
-                  <div className="mt-2 flex items-center justify-between gap-2">
-                    <CategoryChip category={o.category} />
-                    <span className="shrink-0 text-xs text-muted-foreground">
-                      {o.neighborhood} · {o.distanceKm} km
-                    </span>
-                  </div>
-                </div>
-              </Link>
+        <div className="space-y-4 px-4 py-4 pb-24">
+          <div className="flex gap-2 overflow-x-auto pb-1">
+            <FilterPill label="Todas" active={active === "todas"} onClick={() => setActive("todas")} />
+            {categories.map((c) => (
+              <FilterPill
+                key={c.id}
+                label={c.label}
+                active={active === c.id}
+                onClick={() => setActive(c.id)}
+              />
             ))}
+            <span className="ml-auto flex shrink-0 items-center gap-1.5 self-center text-xs text-muted-foreground">
+              <SlidersHorizontal className="h-3.5 w-3.5" /> Filtrar
+            </span>
+          </div>
 
+          <div>
+            <h2 className="mb-2 flex items-center gap-1.5 font-display text-base font-bold">
+              <MapPin className="h-4 w-4 text-primary" /> Ocorrências próximas
+            </h2>
+            <div className="space-y-2.5">
+              {nearby.map((o) => (
+                <OccurrenceCard key={o.id} occurrence={o} />
+              ))}
+            </div>
           </div>
         </div>
+
+        <RegisterFab />
+
       </div>
     </AppShell>
   );

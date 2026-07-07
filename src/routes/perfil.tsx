@@ -1,12 +1,20 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useRef, useState } from "react";
-import { Trophy, LogOut, Camera } from "lucide-react";
+import { Trophy, LogOut, Camera, Pencil, CalendarCheck, Target, Lock } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 import { AuthGate } from "@/components/AuthGate";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { useAuth } from "@/lib/auth";
-import { badges, currentUser } from "@/lib/mock-data";
+import { badges, currentUser, type Badge } from "@/lib/mock-data";
 import { cn } from "@/lib/utils";
+import { toast } from "sonner";
 
 export const Route = createFileRoute("/perfil")({
   head: () => ({
@@ -23,6 +31,7 @@ function ProfilePage() {
   const { name, logout } = useAuth();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [photo, setPhoto] = useState<string>(currentUser.avatar);
+  const [selectedBadge, setSelectedBadge] = useState<Badge | null>(null);
 
   const handlePhoto = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -30,7 +39,7 @@ function ProfilePage() {
   };
 
   return (
-    <AppShell title="Meu perfil" showBell>
+    <AppShell title="Meu perfil" showBell showHelp>
       <div className="space-y-6">
         <div className="flex flex-col items-center text-center">
           <input
@@ -62,6 +71,13 @@ function ProfilePage() {
           <p className="text-sm text-muted-foreground">{currentUser.neighborhood} · João Pessoa</p>
         </div>
 
+        <Button
+          variant="outline"
+          className="w-full gap-2"
+          onClick={() => toast.info("Edição de perfil em breve neste protótipo.")}
+        >
+          <Pencil className="h-4 w-4" /> Editar Perfil
+        </Button>
 
         <div className="grid grid-cols-3 overflow-hidden rounded-2xl bg-primary text-primary-foreground">
           <Stat value={currentUser.occurrencesCount} label="Ocorrências" />
@@ -81,17 +97,22 @@ function ProfilePage() {
             {badges.map((b) => {
               const Icon = b.icon;
               return (
-                <div key={b.id} className="flex flex-col items-center gap-1.5 text-center">
+                <button
+                  key={b.id}
+                  type="button"
+                  onClick={() => setSelectedBadge(b)}
+                  className="flex flex-col items-center gap-1.5 text-center"
+                >
                   <span
                     className={cn(
-                      "grid h-12 w-12 place-items-center rounded-xl",
+                      "grid h-12 w-12 place-items-center rounded-xl transition-transform hover:scale-105",
                       b.earned ? "bg-gold/20 text-gold-foreground" : "bg-muted text-muted-foreground/40",
                     )}
                   >
                     <Icon className="h-6 w-6" />
                   </span>
                   <span className="text-[0.6rem] leading-tight text-muted-foreground">{b.label}</span>
-                </div>
+                </button>
               );
             })}
           </div>
@@ -101,7 +122,59 @@ function ProfilePage() {
           <LogOut className="h-4 w-4" /> Sair
         </Button>
       </div>
+
+      <BadgeDialog badge={selectedBadge} onClose={() => setSelectedBadge(null)} />
     </AppShell>
+  );
+}
+
+function BadgeDialog({ badge, onClose }: { badge: Badge | null; onClose: () => void }) {
+  const Icon = badge?.icon;
+  return (
+    <Dialog open={!!badge} onOpenChange={(open) => !open && onClose()}>
+      <DialogContent className="max-w-xs">
+        {badge && Icon && (
+          <>
+            <DialogHeader className="items-center text-center">
+              <span
+                className={cn(
+                  "mb-2 grid h-16 w-16 place-items-center rounded-2xl",
+                  badge.earned ? "bg-gold/20 text-gold-foreground" : "bg-muted text-muted-foreground/50",
+                )}
+              >
+                <Icon className="h-8 w-8" />
+              </span>
+              <DialogTitle className="font-display">{badge.label}</DialogTitle>
+              <DialogDescription>{badge.description}</DialogDescription>
+            </DialogHeader>
+            <div className="space-y-2 text-sm">
+              <p className="flex items-center gap-2 text-muted-foreground">
+                <Target className="h-4 w-4 shrink-0 text-primary" />
+                <span>
+                  <span className="font-medium text-foreground">Critério: </span>
+                  {badge.criteria}
+                </span>
+              </p>
+              {badge.earned ? (
+                <p className="flex items-center gap-2 text-muted-foreground">
+                  <CalendarCheck className="h-4 w-4 shrink-0 text-primary" />
+                  <span>
+                    <span className="font-medium text-foreground">Conquistado em: </span>
+                    {badge.earnedAt
+                      ? new Date(badge.earnedAt).toLocaleDateString("pt-BR")
+                      : "—"}
+                  </span>
+                </p>
+              ) : (
+                <p className="flex items-center gap-2 text-muted-foreground">
+                  <Lock className="h-4 w-4 shrink-0" /> Ainda não conquistado
+                </p>
+              )}
+            </div>
+          </>
+        )}
+      </DialogContent>
+    </Dialog>
   );
 }
 

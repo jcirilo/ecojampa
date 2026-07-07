@@ -5,6 +5,7 @@ import { useAuth } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { PasswordInput } from "@/components/PasswordInput";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -51,8 +52,16 @@ function LoginPage() {
           />
         </div>
         <div className="space-y-1.5">
-          <Label htmlFor="senha">Senha</Label>
-          <Input id="senha" type="password" placeholder="••••••••" />
+          <div className="flex items-center justify-between">
+            <Label htmlFor="senha">Senha</Label>
+            <Link
+              to="/recuperar-senha"
+              className="text-xs font-medium text-primary underline-offset-4 hover:underline"
+            >
+              Esqueci minha senha
+            </Link>
+          </div>
+          <PasswordInput id="senha" placeholder="••••••••" />
         </div>
         <Button type="submit" className="w-full" size="lg">
           Entrar

@@ -194,14 +194,18 @@ export interface Badge {
   description: string;
   icon: LucideIcon;
   earned: boolean;
+  /** how the badge is unlocked */
+  criteria: string;
+  /** date the badge was earned (only when earned) */
+  earnedAt?: string;
 }
 
 export const badges: Badge[] = [
-  { id: "first", label: "Primeira Denúncia", description: "Registrou sua primeira ocorrência", icon: Sparkles, earned: true },
-  { id: "guardian", label: "Guardião do Bairro", description: "10 ocorrências confirmadas", icon: ShieldCheck, earned: true },
-  { id: "recycler", label: "Reciclador", description: "5 denúncias de descarte", icon: Recycle, earned: true },
-  { id: "eco", label: "Eco Herói", description: "Alcançou 1000 XP", icon: Leaf, earned: false },
-  { id: "auditor", label: "Auditor", description: "Auditou 20 ocorrências", icon: Award, earned: false },
+  { id: "first", label: "Primeira Denúncia", description: "Registrou sua primeira ocorrência na plataforma.", criteria: "Registre 1 ocorrência.", icon: Sparkles, earned: true, earnedAt: "2026-06-05" },
+  { id: "guardian", label: "Guardião do Bairro", description: "Reconhecido por manter o bairro sob vigilância ativa.", criteria: "Tenha 10 ocorrências confirmadas pela comunidade.", icon: ShieldCheck, earned: true, earnedAt: "2026-06-12" },
+  { id: "recycler", label: "Reciclador", description: "Atuante na causa do descarte correto de resíduos.", criteria: "Registre 5 denúncias da categoria Descarte.", icon: Recycle, earned: true, earnedAt: "2026-06-16" },
+  { id: "eco", label: "Eco Herói", description: "O nível máximo de engajamento ambiental.", criteria: "Alcance 1000 XP.", icon: Leaf, earned: false },
+  { id: "auditor", label: "Auditor", description: "Especialista em validar ocorrências de outros moradores.", criteria: "Audite 20 ocorrências.", icon: Award, earned: false },
 ];
 
 export function getBadge(id: string): Badge | undefined {
@@ -213,12 +217,14 @@ export interface NotificationItem {
   text: string;
   date: string;
   unread: boolean;
+  /** related occurrence, used for thumbnail + deep link */
+  occurrenceId?: string;
 }
 
 export const notifications: NotificationItem[] = [
-  { id: "1", text: "Sua denúncia do dia 05/06/2026 foi resolvida! 🎉", date: "Hoje", unread: true },
-  { id: "2", text: "250 usuários marcaram sua denúncia de 05/06/2026 como resolvida.", date: "Ontem", unread: true },
-  { id: "3", text: "46 usuários confirmaram sua denúncia do dia 05/06/2026.", date: "2 dias atrás", unread: false },
+  { id: "1", occurrenceId: "4", text: "Sua ocorrência “Lâmpada queimada na praça” foi resolvida! 🎉", date: "Hoje", unread: true },
+  { id: "2", occurrenceId: "4", text: "250 moradores marcaram “Lâmpada queimada na praça” como resolvida.", date: "Ontem", unread: true },
+  { id: "3", occurrenceId: "5", text: "46 moradores confirmaram sua ocorrência “Lixo acumulado na orla”.", date: "2 dias atrás", unread: false },
   { id: "4", text: "Você ganhou o emblema “Guardião do Bairro”!", date: "3 dias atrás", unread: false },
 ];
 

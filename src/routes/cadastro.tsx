@@ -1,16 +1,18 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useState, type FormEvent } from "react";
-import { Leaf } from "lucide-react";
+import { useMemo, useState, type FormEvent } from "react";
+import { Leaf, Check, X } from "lucide-react";
 import { useAuth } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { PasswordInput } from "@/components/PasswordInput";
+import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/cadastro")({
   head: () => ({
     meta: [
       { title: "Criar conta — EcoJampa" },
-      { name: "description", content: "Crie sua conta EcoJampa e comece a denunciar irregularidades em João Pessoa." },
+      { name: "description", content: "Crie sua conta EcoJampa e comece a registrar ocorrências em João Pessoa." },
     ],
   }),
   component: SignupPage,
@@ -20,9 +22,26 @@ function SignupPage() {
   const { login } = useAuth();
   const navigate = useNavigate();
   const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirm, setConfirm] = useState("");
+
+  const rules = useMemo(
+    () => [
+      { label: "Mínimo de 8 caracteres", ok: password.length >= 8 },
+      { label: "Uma letra maiúscula", ok: /[A-Z]/.test(password) },
+      { label: "Um número", ok: /\d/.test(password) },
+      { label: "Um caractere especial", ok: /[^A-Za-z0-9]/.test(password) },
+    ],
+    [password],
+  );
+
+  const allRulesOk = rules.every((r) => r.ok);
+  const passwordsMatch = confirm.length > 0 && password === confirm;
+  const canSubmit = allRulesOk && passwordsMatch;
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+    if (!canSubmit) return;
     login(name.trim() || "Você");
     navigate({ to: "/mapa" });
   };
@@ -53,13 +72,54 @@ function SignupPage() {
         </div>
         <div className="space-y-1.5">
           <Label htmlFor="senha">Senha</Label>
-          <Input id="senha" type="password" placeholder="••••••••" />
+          <PasswordInput
+            id="senha"
+            placeholder="••••••••"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </div>
+
+        <ul className="space-y-1 rounded-xl bg-muted/60 p-3">
+          <li className="mb-1 text-xs font-semibold text-muted-foreground">
+            Sua senha deve conter:
+          </li>
+          {rules.map((r) => (
+            <li
+              key={r.label}
+              className={cn(
+                "flex items-center gap-2 text-xs",
+                r.ok ? "text-primary" : "text-muted-foreground",
+              )}
+            >
+              {r.ok ? <Check className="h-3.5 w-3.5" /> : <X className="h-3.5 w-3.5" />}
+              {r.label}
+            </li>
+          ))}
+        </ul>
+
         <div className="space-y-1.5">
           <Label htmlFor="confirmar">Confirmar senha</Label>
-          <Input id="confirmar" type="password" placeholder="••••••••" />
+          <PasswordInput
+            id="confirmar"
+            placeholder="••••••••"
+            value={confirm}
+            onChange={(e) => setConfirm(e.target.value)}
+          />
+          {confirm.length > 0 && (
+            <p
+              className={cn(
+                "flex items-center gap-1.5 text-xs",
+                passwordsMatch ? "text-primary" : "text-destructive",
+              )}
+            >
+              {passwordsMatch ? <Check className="h-3.5 w-3.5" /> : <X className="h-3.5 w-3.5" />}
+              {passwordsMatch ? "As senhas coincidem" : "As senhas não coincidem"}
+            </p>
+          )}
         </div>
-        <Button type="submit" className="w-full" size="lg">
+
+        <Button type="submit" className="w-full" size="lg" disabled={!canSubmit}>
           Registrar
         </Button>
       </form>

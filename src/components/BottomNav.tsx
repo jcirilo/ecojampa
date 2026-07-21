@@ -1,11 +1,11 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { MapPin, ClipboardList, BookOpen, User, Settings } from "lucide-react";
+import { Map, ClipboardList, Compass, User, Settings } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const items = [
-  { to: "/mapa", label: "Mapa", icon: MapPin },
+  { to: "/mapa", label: "Mapa", icon: Map },
   { to: "/minhas-ocorrencias", label: "Ocorrências", icon: ClipboardList },
-  { to: "/trilhas", label: "Trilhas", icon: BookOpen },
+  { to: "/trilhas", label: "Trilhas", icon: Compass },
   { to: "/perfil", label: "Perfil", icon: User },
   { to: "/configuracoes", label: "Ajustes", icon: Settings },
 ] as const;

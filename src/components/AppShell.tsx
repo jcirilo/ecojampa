@@ -1,7 +1,8 @@
 import { type ReactNode } from "react";
 import { Link, useRouter } from "@tanstack/react-router";
-import { ArrowLeft, Bell, HelpCircle, Leaf } from "lucide-react";
+import { ArrowLeft, Bell, HelpCircle } from "lucide-react";
 import { BottomNav } from "./BottomNav";
+import { EcoJampaLogo } from "./EcoJampaLogo";
 import { notifications } from "@/lib/mock-data";
 import { cn } from "@/lib/utils";
 
@@ -43,14 +44,24 @@ export function AppShell({
           <Link
             to="/mapa"
             aria-label="EcoJampa"
-            className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-primary text-primary-foreground"
+            className="grid h-9 w-9 shrink-0 place-items-center rounded-xl transition-opacity hover:opacity-70"
           >
-            <Leaf className="h-5 w-5" />
+            <EcoJampaLogo className="h-8 w-8" />
           </Link>
         )}
-        <h1 className="min-w-0 flex-1 truncate font-display text-lg font-bold text-foreground">
-          {title}
-        </h1>
+        <div className="min-w-0 flex-1">
+          <Link
+            to="/mapa"
+            className="font-display text-[0.7rem] font-bold uppercase leading-none tracking-[0.12em] text-primary"
+          >
+            EcoJampa
+          </Link>
+          {title && (
+            <h1 className="mt-0.5 truncate font-display text-lg font-bold leading-tight text-foreground">
+              {title}
+            </h1>
+          )}
+        </div>
         {showHelp && (
           <Link
             to="/ajuda"

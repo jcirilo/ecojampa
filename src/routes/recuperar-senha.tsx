@@ -1,6 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
-import { Leaf, MailCheck, ArrowLeft } from "lucide-react";
+import { MailCheck, ArrowLeft } from "lucide-react";
+import { AuthBackdrop } from "@/components/AuthBackdrop";
+import { EcoJampaLogo } from "@/components/EcoJampaLogo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -25,10 +27,11 @@ function ForgotPasswordPage() {
   };
 
   return (
-    <div className="mx-auto flex min-h-screen w-full max-w-md flex-col justify-center bg-background px-6 py-10 shadow-xl">
+    <div className="relative isolate mx-auto flex min-h-screen w-full max-w-md flex-col justify-center overflow-hidden bg-background px-6 py-10 shadow-xl">
+      <AuthBackdrop />
       <div className="mb-8 flex flex-col items-center text-center">
-        <span className="grid h-16 w-16 place-items-center rounded-2xl bg-primary text-primary-foreground shadow-lg shadow-primary/30">
-          {sent ? <MailCheck className="h-8 w-8" /> : <Leaf className="h-8 w-8" />}
+        <span className="grid h-16 w-16 place-items-center text-primary">
+          {sent ? <MailCheck className="h-10 w-10" /> : <EcoJampaLogo className="h-16 w-16" />}
         </span>
         <h1 className="mt-4 font-display text-2xl font-extrabold text-primary">
           {sent ? "Verifique seu e-mail" : "Esqueci minha senha"}

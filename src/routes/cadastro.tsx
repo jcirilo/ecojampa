@@ -1,6 +1,8 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useMemo, useState, type FormEvent } from "react";
-import { Leaf, Check, X } from "lucide-react";
+import { Check, X } from "lucide-react";
+import { AuthBackdrop } from "@/components/AuthBackdrop";
+import { EcoJampaLogo } from "@/components/EcoJampaLogo";
 import { useAuth } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -47,10 +49,11 @@ function SignupPage() {
   };
 
   return (
-    <div className="mx-auto flex min-h-screen w-full max-w-md flex-col justify-center bg-background px-6 py-10 shadow-xl">
+    <div className="relative isolate mx-auto flex min-h-screen w-full max-w-md flex-col justify-center overflow-hidden bg-background px-6 py-10 shadow-xl">
+      <AuthBackdrop />
       <div className="mb-8 flex flex-col items-center text-center">
-        <span className="grid h-16 w-16 place-items-center rounded-2xl bg-primary text-primary-foreground shadow-lg shadow-primary/30">
-          <Leaf className="h-8 w-8" />
+        <span className="grid h-16 w-16 place-items-center">
+          <EcoJampaLogo className="h-16 w-16" />
         </span>
         <h1 className="mt-4 font-display text-2xl font-extrabold text-primary">Criar conta</h1>
         <p className="mt-1 text-sm text-muted-foreground">Junte-se ao EcoJampa</p>
@@ -60,6 +63,7 @@ function SignupPage() {
         <div className="space-y-1.5">
           <Label htmlFor="nome">Nome</Label>
           <Input
+            className="bg-white"
             id="nome"
             placeholder="Nome Sobrenome"
             value={name}
@@ -68,11 +72,17 @@ function SignupPage() {
         </div>
         <div className="space-y-1.5">
           <Label htmlFor="email">E-mail</Label>
-          <Input id="email" type="email" placeholder="exemplo@email.com" />
+          <Input
+            className="bg-white"
+            id="email" 
+            type="email" 
+            placeholder="exemplo@email.com" 
+          />
         </div>
         <div className="space-y-1.5">
           <Label htmlFor="senha">Senha</Label>
           <PasswordInput
+            className="bg-white"
             id="senha"
             placeholder="••••••••"
             value={password}
@@ -89,7 +99,11 @@ function SignupPage() {
               key={r.label}
               className={cn(
                 "flex items-center gap-2 text-xs",
-                r.ok ? "text-primary" : "text-muted-foreground",
+                r.ok
+                  ? "text-primary"
+                  : password.length > 0
+                    ? "text-destructive"
+                    : "text-muted-foreground",
               )}
             >
               {r.ok ? <Check className="h-3.5 w-3.5" /> : <X className="h-3.5 w-3.5" />}
@@ -101,6 +115,7 @@ function SignupPage() {
         <div className="space-y-1.5">
           <Label htmlFor="confirmar">Confirmar senha</Label>
           <PasswordInput
+            className="bg-white"
             id="confirmar"
             placeholder="••••••••"
             value={confirm}

@@ -66,7 +66,7 @@ function SettingsPage() {
           </button>
         )}
 
-        <p className="pt-2 text-center text-xs text-muted-foreground">EcoJampa · versão 1.0.0</p>
+        <p className="pt-2 text-center text-xs text-muted-foreground">Protótipo EcoJampa · versão 2.5.0</p>
       </div>
     </AppShell>
   );

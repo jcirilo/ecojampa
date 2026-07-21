@@ -2,15 +2,11 @@
 @source "../src";
 @import "tw-animate-css";
 
-@import "@fontsource/outfit/400.css";
-@import "@fontsource/outfit/500.css";
-@import "@fontsource/outfit/600.css";
-@import "@fontsource/outfit/700.css";
-@import "@fontsource/outfit/800.css";
-@import "@fontsource/figtree/400.css";
-@import "@fontsource/figtree/500.css";
-@import "@fontsource/figtree/600.css";
-@import "@fontsource/figtree/700.css";
+@import "@fontsource/plus-jakarta-sans/400.css";
+@import "@fontsource/plus-jakarta-sans/500.css";
+@import "@fontsource/plus-jakarta-sans/600.css";
+@import "@fontsource/plus-jakarta-sans/700.css";
+@import "@fontsource/plus-jakarta-sans/800.css";
 
 @import "leaflet/dist/leaflet.css";
 
@@ -24,8 +20,8 @@
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
 
-  --font-sans: "Figtree", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -51,6 +47,9 @@
   --color-gold: var(--gold);
   --color-gold-foreground: var(--gold-foreground);
 
+  --color-coral: var(--coral);
+  --color-coral-foreground: var(--coral-foreground);
+
   --color-status-lighting: var(--status-lighting);
   --color-status-waste: var(--status-waste);
   --color-status-vandalism: var(--status-vandalism);
@@ -68,88 +67,100 @@
 :root {
   --radius: 0.875rem;
 
-  --background: oklch(0.985 0.012 145);
-  --foreground: oklch(0.24 0.05 160);
+  /* Identidade litorânea: teal-oceano + coral + areia dourada */
+  --background: oklch(0.985 0.006 205);
+  --foreground: oklch(0.23 0.035 220);
 
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.24 0.05 160);
+  --card-foreground: oklch(0.23 0.035 220);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.24 0.05 160);
+  --popover-foreground: oklch(0.23 0.035 220);
 
-  --primary: oklch(0.42 0.1 165);
-  --primary-foreground: oklch(0.98 0.015 145);
+  --primary: oklch(0.5 0.11 200);
+  --primary-foreground: oklch(0.99 0.01 200);
 
-  --secondary: oklch(0.94 0.03 150);
-  --secondary-foreground: oklch(0.32 0.07 165);
+  --secondary: oklch(0.93 0.03 200);
+  --secondary-foreground: oklch(0.34 0.07 205);
 
-  --muted: oklch(0.95 0.02 150);
-  --muted-foreground: oklch(0.5 0.04 160);
+  --muted: oklch(0.955 0.014 205);
+  --muted-foreground: oklch(0.5 0.03 210);
 
-  --accent: oklch(0.55 0.12 165);
-  --accent-foreground: oklch(0.98 0.015 145);
+  --accent: oklch(0.92 0.035 200);
+  --accent-foreground: oklch(0.34 0.07 205);
 
-  --gold: oklch(0.76 0.12 88);
-  --gold-foreground: oklch(0.28 0.06 90);
+  --coral: oklch(0.67 0.15 32);
+  --coral-foreground: oklch(0.99 0.01 40);
 
-  --status-lighting: oklch(0.82 0.16 85);
-  --status-waste: oklch(0.55 0.18 28);
-  --status-vandalism: oklch(0.55 0.15 255);
+  --gold: oklch(0.78 0.1 82);
+  --gold-foreground: oklch(0.3 0.05 82);
 
-  --destructive: oklch(0.55 0.2 28);
-  --destructive-foreground: oklch(0.98 0.015 145);
+  --status-lighting: oklch(0.8 0.15 82);
+  --status-waste: oklch(0.62 0.17 32);
+  --status-vandalism: oklch(0.56 0.13 235);
 
-  --border: oklch(0.9 0.02 150);
-  --input: oklch(0.9 0.02 150);
-  --ring: oklch(0.42 0.1 165);
+  --destructive: oklch(0.57 0.2 28);
+  --destructive-foreground: oklch(0.99 0.01 40);
 
-  --sidebar: oklch(0.98 0.015 145);
-  --sidebar-foreground: oklch(0.24 0.05 160);
-  --sidebar-primary: oklch(0.42 0.1 165);
-  --sidebar-primary-foreground: oklch(0.98 0.015 145);
-  --sidebar-accent: oklch(0.94 0.03 150);
-  --sidebar-accent-foreground: oklch(0.32 0.07 165);
-  --sidebar-border: oklch(0.9 0.02 150);
-  --sidebar-ring: oklch(0.42 0.1 165);
+  --border: oklch(0.9 0.015 205);
+  --input: oklch(0.9 0.015 205);
+  --ring: oklch(0.5 0.11 200);
+
+  --sidebar: oklch(0.985 0.006 205);
+  --sidebar-foreground: oklch(0.23 0.035 220);
+  --sidebar-primary: oklch(0.5 0.11 200);
+  --sidebar-primary-foreground: oklch(0.99 0.01 200);
+  --sidebar-accent: oklch(0.92 0.035 200);
+  --sidebar-accent-foreground: oklch(0.34 0.07 205);
+  --sidebar-border: oklch(0.9 0.015 205);
+  --sidebar-ring: oklch(0.5 0.11 200);
 }
 
 .dark {
-  --background: oklch(0.18 0.03 165);
-  --foreground: oklch(0.96 0.015 145);
-  --card: oklch(0.23 0.04 165);
-  --card-foreground: oklch(0.96 0.015 145);
-  --popover: oklch(0.23 0.04 165);
-  --popover-foreground: oklch(0.96 0.015 145);
-  --primary: oklch(0.65 0.12 160);
-  --primary-foreground: oklch(0.18 0.03 165);
-  --secondary: oklch(0.3 0.04 165);
-  --secondary-foreground: oklch(0.96 0.015 145);
-  --muted: oklch(0.3 0.04 165);
-  --muted-foreground: oklch(0.7 0.03 155);
-  --accent: oklch(0.55 0.12 165);
-  --accent-foreground: oklch(0.98 0.015 145);
-  --gold: oklch(0.78 0.12 88);
-  --gold-foreground: oklch(0.22 0.05 90);
-  --status-lighting: oklch(0.82 0.16 85);
-  --status-waste: oklch(0.6 0.18 28);
-  --status-vandalism: oklch(0.6 0.15 255);
-  --destructive: oklch(0.6 0.2 28);
-  --destructive-foreground: oklch(0.98 0.015 145);
+  --background: oklch(0.19 0.03 220);
+  --foreground: oklch(0.96 0.012 205);
+  --card: oklch(0.23 0.035 220);
+  --card-foreground: oklch(0.96 0.012 205);
+  --popover: oklch(0.23 0.035 220);
+  --popover-foreground: oklch(0.96 0.012 205);
+  --primary: oklch(0.68 0.12 195);
+  --primary-foreground: oklch(0.18 0.03 220);
+  --secondary: oklch(0.3 0.035 218);
+  --secondary-foreground: oklch(0.96 0.012 205);
+  --muted: oklch(0.3 0.035 218);
+  --muted-foreground: oklch(0.72 0.025 205);
+  --accent: oklch(0.32 0.04 210);
+  --accent-foreground: oklch(0.96 0.012 205);
+  --coral: oklch(0.7 0.15 34);
+  --coral-foreground: oklch(0.18 0.03 220);
+  --gold: oklch(0.8 0.1 84);
+  --gold-foreground: oklch(0.24 0.05 84);
+  --status-lighting: oklch(0.8 0.15 82);
+  --status-waste: oklch(0.66 0.17 34);
+  --status-vandalism: oklch(0.62 0.13 235);
+  --destructive: oklch(0.62 0.2 28);
+  --destructive-foreground: oklch(0.99 0.01 40);
   --border: oklch(1 0 0 / 12%);
   --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.65 0.12 160);
-  --sidebar: oklch(0.23 0.04 165);
-  --sidebar-foreground: oklch(0.96 0.015 145);
-  --sidebar-primary: oklch(0.65 0.12 160);
-  --sidebar-primary-foreground: oklch(0.18 0.03 165);
-  --sidebar-accent: oklch(0.3 0.04 165);
-  --sidebar-accent-foreground: oklch(0.96 0.015 145);
+  --ring: oklch(0.68 0.12 195);
+  --sidebar: oklch(0.23 0.035 220);
+  --sidebar-foreground: oklch(0.96 0.012 205);
+  --sidebar-primary: oklch(0.68 0.12 195);
+  --sidebar-primary-foreground: oklch(0.18 0.03 220);
+  --sidebar-accent: oklch(0.32 0.04 210);
+  --sidebar-accent-foreground: oklch(0.96 0.012 205);
   --sidebar-border: oklch(1 0 0 / 12%);
-  --sidebar-ring: oklch(0.65 0.12 160);
+  --sidebar-ring: oklch(0.68 0.12 195);
 }
 
 @layer base {
   * {
     border-color: var(--color-border);
+  }
+
+  /* Base tipográfica levemente maior para melhor leitura e aproveitar mais a tela.
+     Como o app usa rem, isso escala textos e a largura da coluna proporcionalmente. */
+  html {
+    font-size: 112.5%;
   }
 
   body {
@@ -166,4 +177,39 @@
 /* Hide leaflet attribution flag for cleaner prototype look while keeping credit */
 .leaflet-container {
   font-family: var(--font-sans);
+}
+
+/* Motion — staggered entrance + ambient drift. Disabled under reduced-motion:
+   the hidden initial state lives inside the media query, so reduced-motion
+   users always see the content fully visible and static. */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes eco-rise {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes eco-drift {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    50% {
+      transform: translate(14px, -16px) scale(1.06);
+    }
+  }
+
+  .eco-rise {
+    opacity: 0;
+    animation: eco-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .eco-drift {
+    animation: eco-drift 16s ease-in-out infinite;
+  }
 }

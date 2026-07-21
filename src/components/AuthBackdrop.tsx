@@ -27,12 +27,38 @@ export function AuthBackdrop() {
         preserveAspectRatio="none"
         fill="currentColor"
       >
-        <path d="M0 60 C60 20 120 100 200 70 C280 40 340 90 400 55 L400 120 L0 120 Z" />
         <path
-          className="text-coral/45"
+          fill="currentColor"
+          d="M0 60 C60 20 120 100 200 70 C280 40 340 90 400 55 L400 120 L0 120 Z"
+        >
+          <animate
+            attributeName="d"
+            dur="8s"
+            repeatCount="indefinite"
+            values="
+              M0 60 C60 20 120 100 200 70 C280 40 340 90 400 55 L400 120 L0 120 Z;
+              M0 55 C70 30 120 80 200 75 C280 55 340 85 400 60 L400 120 L0 120 Z;
+              M0 60 C60 20 120 100 200 70 C280 40 340 90 400 55 L400 120 L0 120 Z
+            "
+          />
+        </path>
+        <path
           fill="currentColor"
           d="M0 85 C70 55 130 110 210 88 C300 63 350 105 400 82 L400 120 L0 120 Z"
-        />
+        >
+          <animate
+            attributeName="d"
+            dur="11s"
+            repeatCount="indefinite"
+            values="
+              M0 85 C70 55 130 110 210 88 C300 63 350 105 400 82 L400 120 L0 120 Z;
+              M0 80 C60 65 140 95 210 90 C290 70 360 95 400 78 L400 120 L0 120 Z;
+              M0 85 C70 55 130 110 210 88 C300 63 350 105 400 82 L400 120 L0 120 Z
+            "
+          />
+        </path>
+        {/* <path d="M0 60 C60 20 120 100 200 70 C280 40 340 90 400 55 L400 120 L0 120 Z" /> */}
+        {/* <path className="text-coral/45" fill="currentColor" d="M0 85 C70 55 130 110 210 88 C300 63 350 105 400 82 L400 120 L0 120 Z"/> */}
       </svg>
     </div>
   );

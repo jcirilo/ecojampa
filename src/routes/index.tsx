@@ -60,6 +60,7 @@ function LoginPage() {
         <div className="space-y-1.5">
           <Label htmlFor="email">E-mail</Label>
           <Input
+            className="bg-white"
             id="email"
             type="email"
             placeholder="exemplo@email.com"
@@ -77,7 +78,7 @@ function LoginPage() {
               Esqueci minha senha
             </Link>
           </div>
-          <PasswordInput id="senha" placeholder="••••••••" />
+          <PasswordInput className="bg-white" id="senha" placeholder="••••••••" />
         </div>
         <Button type="submit" className="w-full" size="lg">
           Entrar

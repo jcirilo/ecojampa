@@ -46,7 +46,7 @@ export function AppShell({
             aria-label="EcoJampa"
             className="grid h-9 w-9 shrink-0 place-items-center rounded-xl transition-opacity hover:opacity-70"
           >
-            <EcoJampaLogo className="h-8 w-8" />
+            <EcoJampaLogo className="h-10 w-10" />
           </Link>
         )}
         <div className="min-w-0 flex-1">
@@ -57,7 +57,7 @@ export function AppShell({
             EcoJampa
           </Link>
           {title && (
-            <h1 className="mt-0.5 truncate font-display text-lg font-bold leading-tight text-foreground">
+            <h1 className="truncate font-display text-lg font-bold leading-tight text-foreground">
               {title}
             </h1>
           )}

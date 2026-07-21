@@ -63,6 +63,7 @@ function SignupPage() {
         <div className="space-y-1.5">
           <Label htmlFor="nome">Nome</Label>
           <Input
+            className="bg-white"
             id="nome"
             placeholder="Nome Sobrenome"
             value={name}
@@ -71,11 +72,17 @@ function SignupPage() {
         </div>
         <div className="space-y-1.5">
           <Label htmlFor="email">E-mail</Label>
-          <Input id="email" type="email" placeholder="exemplo@email.com" />
+          <Input
+            className="bg-white"
+            id="email" 
+            type="email" 
+            placeholder="exemplo@email.com" 
+          />
         </div>
         <div className="space-y-1.5">
           <Label htmlFor="senha">Senha</Label>
           <PasswordInput
+            className="bg-white"
             id="senha"
             placeholder="••••••••"
             value={password}
@@ -108,6 +115,7 @@ function SignupPage() {
         <div className="space-y-1.5">
           <Label htmlFor="confirmar">Confirmar senha</Label>
           <PasswordInput
+            className="bg-white"
             id="confirmar"
             placeholder="••••••••"
             value={confirm}
